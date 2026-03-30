@@ -1,0 +1,126 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taux de Réussite - Collège Privé Loubo</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: linear-gradient(135deg, #004aad, #002f6c);
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+}
+
+header h1{
+    margin:0;
+    font-size:32px;
+}
+
+header p{
+    margin-top:10px;
+    opacity:0.9;
+}
+
+/* SECTION TAUX */
+.section-taux{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:70vh;
+}
+
+.card{
+    background:white;
+    padding:60px 40px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+    text-align:center;
+    width:90%;
+    max-width:700px;
+}
+
+.card h2{
+    font-size:30px;
+    margin-bottom:20px;
+    color:#002f6c;
+    text-transform:uppercase;
+    letter-spacing:2px;
+}
+
+#counter{
+    font-size:200px; /* TRÈS TRÈS GRAND */
+    font-weight:bold;
+    margin:0;
+    line-height:1;
+    background: linear-gradient(45deg, #6ecd5b, #00c3ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle{
+    font-size:22px;
+    margin-top:20px;
+    color:#555;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:20px;
+    background:#002f6c;
+    color:white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Collège Privé Loubo de Grand-Zattry</h1>
+    <p>Plateforme officielle des résultats scolaires</p>
+</header>
+
+<section class="section-taux">
+    <div class="card">
+        <h2>Taux de Réussite</h2>
+        <p id="counter">0%</p>
+        <div class="subtitle">
+            Année Scolaire 2025 - 2026
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2025 - Tous droits réservés
+</footer>
+
+<script>
+// Animation compteur jusqu'à 80%
+let count = 0;
+let target = 80;
+let speed = 30;
+
+let counter = document.getElementById("counter");
+
+let interval = setInterval(function(){
+    if(count >= target){
+        clearInterval(interval);
+    } else {
+        count++;
+        counter.innerHTML = count + "%";
+    }
+}, speed);
+</script>
+
+</body>
+</html>

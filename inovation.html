@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technologies Modernes - Innovation</title>
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* HEADER */
+header{
+    background: linear-gradient(135deg, #00c853, #64dd17);
+    color:white;
+    padding:40px 20px;
+    text-align:center;
+}
+
+header h1{
+    font-size:32px;
+}
+
+header p{
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* SECTION */
+section{
+    padding:60px 20px;
+    text-align:center;
+}
+
+.section-title{
+    font-size:28px;
+    margin-bottom:40px;
+    color:#333;
+}
+
+/* CARDS */
+.container{
+    display:flex;
+    justify-content:center;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.card{
+    background:white;
+    width:300px;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.1);
+    transition:0.4s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 15px 35px rgba(0,0,0,0.2);
+}
+
+.card h3{
+    margin-bottom:15px;
+    color:#00c853;
+}
+
+/* BUTTON */
+button{
+    margin-top:40px;
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#00c853,#64dd17);
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    opacity:0.8;
+}
+
+/* FOOTER */
+footer{
+    background:#222;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:50px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Innovation Technologique</h1>
+    <p>Utilisation des technologies modernes pour améliorer l’apprentissage des élèves</p>
+</header>
+
+<section>
+    <h2 class="section-title">Nos Outils Numériques</h2>
+
+    <div class="container">
+
+        <div class="card" onclick="info1()">
+            <h3>Tableaux Numériques</h3>
+            <p>Des salles équipées de tableaux interactifs pour un apprentissage dynamique.</p>
+        </div>
+
+        <div class="card" onclick="info2()">
+            <h3>Plateforme en Ligne</h3>
+            <p>Accès aux cours, exercices et résultats en ligne 24h/24.</p>
+        </div>
+
+        <div class="card" onclick="info3()">
+            <h3>Laboratoire Informatique</h3>
+            <p>Ordinateurs modernes pour développer les compétences numériques.</p>
+        </div>
+
+    </div>
+
+    <button onclick="presentation()">Découvrir Notre Vision</button>
+</section>
+
+<footer>
+    © 2026 Excellence Académique | Innovation & Technologie
+</footer>
+
+<script>
+
+function info1(){
+    alert("Nos tableaux numériques facilitent l’interaction entre enseignants et élèves.");
+}
+
+function info2(){
+    alert("Notre plateforme permet le suivi des notes, devoirs et communications scolaires.");
+}
+
+function info3(){
+    alert("Nos laboratoires sont équipés d’ordinateurs modernes et d’internet haut débit.");
+}
+
+function presentation(){
+    alert("Notre établissement mise sur l’innovation pour préparer les élèves au monde professionnel moderne.");
+}
+
+</script>
+
+</body>
+</html>

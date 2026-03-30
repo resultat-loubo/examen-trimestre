@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Administration</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f9;
+}
+
+/* HEADER */
+header{
+    background: linear-gradient(135deg, #004aad, #002f6c);
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+}
+
+/* MENU */
+nav{
+    background:white;
+    padding:15px;
+    text-align:center;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+nav a{
+    text-decoration:none;
+    margin:0 20px;
+    font-weight:bold;
+    color:#002f6c;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#004aad;
+}
+
+nav .active{
+    color:#004aad;
+    border-bottom:3px solid #004aad;
+    padding-bottom:5px;
+}
+
+/* SECTION CONTACT */
+.section-contact{
+    padding:60px 20px;
+    text-align:center;
+}
+
+.section-contact h2{
+    font-size:30px;
+    margin-bottom:40px;
+    color:#002f6c;
+}
+
+/* CARDS */
+.container{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+.card{
+    background:linear-gradient(135deg,#3703f5,#f8f9fa,#10fd04);
+    width:280px;
+    padding:30px 20px;
+    border-radius:20px;
+    box-shadow:0 15px 30px rgba(28, 15, 15, 0.1);
+    transition:0.4s;
+    opacity:0;
+    transform:translateY(30px);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+.card img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:20px;
+    border:4px solid #f181c4;
+}
+.card img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    margin-bottom:20px;
+    border:4px solid #130704;
+}
+
+.card h3{
+    margin:10px 0 5px 0;
+    color:#ea5b09;
+}
+
+.role{
+    font-size:14px;
+    color:#777;
+    margin-bottom:10px;
+}
+
+.phone{
+    font-weight:bold;
+    color:#004aad;
+    font-size:16px;
+    margin-bottom:15px;
+}
+
+/* BOUTONS */
+.btn{
+    display:inline-block;
+    margin:5px;
+    padding:8px 15px;
+    border-radius:20px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.3s;
+}
+
+.call{
+    background:#004aad;
+    color:white;
+}
+
+.call:hover{
+    background:#002f6c;
+}
+
+.whatsapp{
+    background:#25D366;
+    color:white;
+}
+
+.whatsapp:hover{
+    background:#1da851;
+}
+
+/* FOOTER */
+footer{
+    background:#002f6c;
+    color:white;
+    text-align:center;
+    padding:20px;
+    margin-top:40px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .container{
+        flex-direction:column;
+        align-items:center;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Collège Privé Loubo de Grand-Zattry</h1>
+    <p>Contact de l’Administration</p>
+</header>
+
+<nav>
+    <a href="index.html">Accueil</a>
+    <a href="taux.html">Taux de Réussite</a>
+    <a href="contact.html" class="active">Contact</a>
+</nav>
+
+<section class="section-contact">
+    <h2>Administration</h2>
+
+    <div class="container">
+
+        <!-- PERSONNE 1 -->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 2 -->
+        <div class="card">
+            <img src="JD/JD3.jpg" alt="Secrétaire">
+            <h3>Mme TRAORE Awa</h3>
+            <div class="role">Secrétaire Générale</div>
+            <div class="phone">+2250700000002</div>
+            <a href="tel:+2250700000002" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250700000002" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 3 -->
+        <div class="card">
+            <img src="JD/JD4.jpeg" alt="Censeur">
+            <h3>M. DIABY Ibrahim</h3>
+            <div class="role">Censeur</div>
+            <div class="phone">+2250700000003</div>
+            <a href="tel:+2250700000003" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250700000003" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 4 -->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 5 -->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 6-->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 7 -->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 8 -->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+        <!-- PERSONNE 9 -->
+        <div class="card">
+            <img src="JD/JD5.jpeg" alt="Directeur">
+            <h3>M. KOUAME JOSEPH</h3>
+            <div class="role">Programmeur</div>
+            <div class="phone">+2250594720472</div>
+            <a href="tel:+2250594720472" class="btn call">Appeler</a>
+            <a href="https://wa.me/2250594720472" class="btn whatsapp">WhatsApp</a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    © 2025 Collège Privé Loubo - Tous droits réservés
+</footer>
+
+<script>
+// Animation apparition progressive
+const cards = document.querySelectorAll('.card');
+
+window.addEventListener('load', () => {
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            card.classList.add('show');
+        }, index * 300);
+    });
+});
+</script>
+
+</body>
+</html>

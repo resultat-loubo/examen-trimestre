@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Convocation INJS</title>
+
+<style>
+
+/* PAGE */
+body {
+    font-family: Arial;
+    background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    margin: 0;
+}
+
+/* FORMULAIRE */
+.formulaire {
+    background: white;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    background: #2c5364;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* FICHE */
+#fiche {
+    display: none;
+    width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* HEADER */
+.top-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bloc {
+    width: 45%;
+    text-align: center;
+}
+
+.bloc img {
+    width: 70px;
+}
+
+/* TITRE */
+.titre {
+    text-align: center;
+}
+
+/* NUMERO */
+.numero {
+    text-align: center;
+}
+
+/* PHOTO */
+.photo img {
+    width: 120px;
+    height: 140px;
+    border: 1px solid black;
+    display: block;
+    margin: 10px auto;
+    object-fit: cover;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+/* ACTIONS */
+.actions {
+    display: none;
+    text-align: center;
+    margin: 30px;
+}
+
+/* PRINT */
+@media print {
+    .formulaire, .actions {
+        display: none;
+    }
+
+    body {
+        background: white;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- FORMULAIRE -->
+<div class="formulaire">
+    <h2>🎓 Vérifier votre convocation</h2>
+    <input type="text" id="numero" placeholder="Ex: 240001">
+    <br>
+    <button onclick="verifier()">Vérifier</button>
+    <p id="erreur" style="color:red;"></p>
+</div>
+
+<!-- FICHE -->
+<div id="fiche">
+
+    <!-- HEADER -->
+    <div class="top-header">
+        <div class="bloc">
+            <img src="logo-gauche.png" onerror="this.style.display='none'">
+            <p>MINISTERE DES SPORTS</p>
+            <p>INJS</p>
+        </div>
+
+        <div class="bloc">
+            <img src="JD/JD6.jpeg" onerror="this.style.display='none'">
+        </div>
+    </div>
+
+    <h3 class="titre">CONVOCATION AUX CONCOURS INJS 2024</h3>
+
+    <p class="numero">
+        NUMERO DE TABLE : <strong id="numTable"></strong>
+    </p>
+
+    <!-- PHOTO -->
+    <div class="photo">
+        <img id="photo">
+    </div>
+
+    <p><strong>Nom :</strong> <span id="nom"></span></p>
+<ol>
+    <!-- TABLEAU -->
+    <h4>Epreuves</h4>
+</ol>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Epreuve</th>
+            <th>Lieu</th>
+        </tr>
+        <tr>
+            <td>03 Oct</td>
+            <td>Gymnastique</td>
+            <td>INJS</td>
+        </tr>
+        <tr>
+            <td>07 Oct</td>
+            <td>Athlétisme</td>
+            <td>INJS</td>
+        </tr>
+    </table>
+  <!-- TABLEAU 2 -->
+    <h4>Disciplines</h4>
+    <table>
+        <tr>
+            <th>Epreuves</th>
+            <th>Disciplines</th>
+        </tr>
+        <tr>
+            <td>Saut</td>
+            <td>Saut en hauteur</td>
+        </tr>
+        <tr>
+            <td>Vitesse</td>
+            <td>100m</td>
+        </tr>
+    </table>
+</div>
+
+<!-- ACTIONS -->
+<div class="actions" id="actions">
+    <button onclick="window.print()">🖨️ Imprimer</button>
+    <button onclick="downloadPDF()">📄 Télécharger</button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+<script>
+
+/* BASE DE DONNÉES */
+const eleves = [
+    {numero:"240001", nom:"KOUAME JEAN", photo:"JD/JD3.jpg"},
+    {numero:"240002", nom:"KOFFI MARIE", photo:"photo2.jpg"},
+    {numero:"240003", nom:"KONE IBRAHIM", photo:"photo3.jpg"},
+    {numero:"240004", nom:"DIARRA FATOU", photo:"photo4.jpg"},
+    {numero:"240005", nom:"YAO PAUL", photo:"photo5.jpg"},
+    {numero:"240006", nom:"TRAORE AMINATA", photo:"photo6.jpg"},
+    {numero:"240007", nom:"COULIBALY ADAMA", photo:"photo7.jpg"},
+    {numero:"240008", nom:"SANGARE MOUSSA", photo:"photo8.jpg"},
+    {numero:"240009", nom:"BAMBA AICHA", photo:"photo9.jpg"},
+    {numero:"240010", nom:"OUATTARA ISSA", photo:"photo10.jpg"}
+];
+
+/* VERIFICATION */
+function verifier() {
+    let num = document.getElementById("numero").value;
+    let eleve = eleves.find(e => e.numero === num);
+
+    if(!eleve) {
+        document.getElementById("erreur").innerText = "❌ Numéro invalide";
+        document.getElementById("fiche").style.display = "none";
+        document.getElementById("actions").style.display = "none";
+        return;
+    }
+
+    document.getElementById("erreur").innerText = "";
+    document.getElementById("numTable").innerText = eleve.numero;
+    document.getElementById("nom").innerText = eleve.nom;
+    document.getElementById("photo").src = eleve.photo;
+
+    document.getElementById("fiche").style.display = "block";
+    document.getElementById("actions").style.display = "block";
+}
+
+/* PDF */
+function downloadPDF() {
+    const element = document.getElementById("fiche");
+    html2pdf().from(element).save("convocation.pdf");
+}
+
+</script>
+
+</body>
+</html>

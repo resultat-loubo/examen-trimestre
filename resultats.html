@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Résultats</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:rgb(219,208,208);}
+img{
+    width:15%;
+    padding:10px;
+    margin-right:20px;
+    border-radius:80px;
+    } 
+  
+ .fiche{position: relative;min-height:10px;}  
+.photo{width:5%; padding:0px; margin-right:20px;border-radius:0px;}  
+.menu{background:linear-gradient(135deg,#0bb102,#2575fc);padding:10px;text-align:center;}
+.menu a{color:rgb(223,234,16);margin:0 10px;text-decoration:none;font-weight:bold;}
+.container{display:flex;padding:20px;}
+.content{width:70%;background:rgb(222,228,239);padding:20px;margin-right:20px;border-radius:20px;}
+.form-box{border:2px solid #08d735;padding:15px;margin-top:15px;}
+.form-box input{width:95%;padding:8px;margin-top:5px;margin-bottom:10px;}
+button{padding:10px 20px;border:none;cursor:pointer;border-radius:10px;}
+.verify{background:#dddddd;}
+.cancel{background:#370ffc;color:white;}
+.result-box{margin-top:20px;}
+.success{background:green;color:white;padding:15px;}
+.fail{background:red;color:white;padding:15px;}
+.footer{background:#09099c;color:white;text-align:center;padding:20px;margin-top:30px;}
+.btn-pdf{background:#057421;color:white;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;margin-top:15px;}
+.btn-print{background:#100574;color:white;padding:10px 20px;border:none;border-radius:6px;cursor:pointer;margin-top:15px;}
+.fiche-container{width:800px;margin:auto;font-family:Arial,sans-serif;}
+.fiche-header{text-align:center;margin-bottom:20px;}
+.fiche-photo{width:120px;height:150px;object-fit:cover;border-radius:10px;}
+.section-title{font-weight:bold;margin-top:20px;border-bottom:2px solid rgb(17, 7, 52);padding-bottom:5px;}
+table{width:100%;border-collapse:collapse;margin-top:10px;}
+table,th,td{border:1px solid rgb(5, 5, 5);padding:6px;text-align:center;}
+th{background:#0a2a66;color:white;}
+@media print{body *{visibility:hidden;}#ficheImpression, #ficheImpression *{visibility:visible;}#ficheImpression{position:absolute;left:0;top:0;width:100%;}}
+</style>
+</head>
+<body>
+
+<div class="menu">
+ <div class="section-title"><big><ol></ol></big></div>   
+<h1><marquee>ANNEE SCOLAIRE 2025-2026</marquee></h1>
+<div class="section-title"><big><ol></ol></big></div>
+<img src="JD/JD3.jpg">
+<a href="index.html">Accueil</a>
+<a href="resultats.html">Résultats</a>
+<a href="info.html">Contact</a>
+<a href="election.html">Election</a>
+<a href="convocation.html">Convocation</a>
+<a href="#">Préinscription</a>
+<img src="JD/JD6.jpeg">
+</div>
+<div class="section-title"><big><ol></ol></big></div>
+<div class="container">
+<div class="content">
+
+<h4>RESULTATS DU PREMIER TRIMESTRE SAISON 2025-2026</h4>
+<div class="section-title"><big><ol></ol></big></div>
+<div class="form-box">
+<p class="red-title">Vérifiez avec votre nom et date :</p>
+<label>Nom et Prénom :</label>
+<input type="text" id="nom">
+<label>Date de naissance (JJ/MM/AAAA) :</label>
+<input type="text" id="date">
+<button class="verify" onclick="verifierNom()">VERIFIER</button>
+<button class="cancel" onclick="annulerNom()">ANNULER</button>
+</div>
+<div class="section-title"><big><ol></ol></big></div>
+<br>
+
+<div class="form-box">
+<p class="red-title">Vérifiez avec votre Matricule :</p>
+<label>Numéro Matricule :</label>
+<input type="text" id="numero">
+<button class="verify" onclick="verifierNumero()">VERIFIER</button>
+<button class="cancel" onclick="annulerNumero()">ANNULER</button>
+</div>
+<div class="section-title"><big><ol></ol></big></div>
+<div id="resultat" class="result-box"></div>
+</div>
+</div>
+<div class="footer">
+©️ 2025 COLLEGE PRIVE LOUBO DE GRAND-ZATTRY  | Développé par KOUAME OUFLE JOSEPH (Alkashi)<p>|kouamejosph582@icloud.com| Tel:05-94-72-04-04 </p> | 
+</div>
+
+<script>
+// ==== DONNEES ====
+let admis = [   
+{nom:"KOUAME OUFLE JOSEPH",genre:"M", date:"25/07/2006",numero:"16396197M",moyenne:17.27,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+ matieres:[
+   {nom:"Mathématiques",moyenne:18,coef:4},
+   {nom:"Physique",moyenne:17,coef:4},
+   {nom:"svt",moyenne:16,coef:4},
+   {nom:"Anglais",moyenne:15,coef:2}
+ ]
+},
+{nom:"KONAN KOUAKOU MARUIS",genre:"M",date:"25/07/2007",numero:"16396198M",moyenne:18.80,valider:"✔",niveau:"BTS2",photo:"JD/JD9.png",
+ matieres:[
+   {nom:"Mathématiques",moyenne:20,coef:4},
+   {nom:"Physique",moyenne:18,coef:4},
+   {nom:"svt",moyenne:19,coef:4},
+   {nom:"Anglais",moyenne:18,coef:2}
+ ]
+},
+{nom:"KONE ABDOUL",genre:"M",date:"01/01/2005",numero:"10001M",moyenne:12,valider:"✔",niveau:"BTS2",photo:"JD/JD10.jpg",
+matieres:[
+{nom:"Mathématiques",moyenne:13,coef:4},
+{nom:"Physique",moyenne:12,coef:4},
+{nom:"svt",moyenne:11,coef:4},
+{nom:"Anglais",moyenne:12,coef:2}
+]},
+
+{nom:"YAO PAUL",genre:"M",date:"02/02/2005",numero:"10002M",moyenne:8,valider:"❌",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:7,coef:4},
+{nom:"Physique",moyenne:8,coef:4},
+{nom:"svt",moyenne:9,coef:4},
+{nom:"Anglais",moyenne:8,coef:2}
+]},
+
+{nom:"TRAORE FATOU",genre:"F",date:"03/03/2005",numero:"10003F",moyenne:15,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:16,coef:4},
+{nom:"Physique",moyenne:15,coef:4},
+{nom:"svt",moyenne:14,coef:4},
+{nom:"Anglais",moyenne:15,coef:2}
+]},
+
+{nom:"KOUASSI MARIE",genre:"F",date:"04/04/2005",numero:"10004F",moyenne:9,niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:9,coef:4},
+{nom:"Physique",moyenne:10,coef:4},
+{nom:"svt",moyenne:8,coef:4},
+{nom:"Anglais",moyenne:9,coef:2}
+]},
+
+{nom:"OUATTARA ADAMA",genre:"M",date:"05/05/2005",numero:"10005M",moyenne:18,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:19,coef:4},
+{nom:"Physique",moyenne:18,coef:4},
+{nom:"svt",moyenne:17,coef:4},
+{nom:"Anglais",moyenne:18,coef:2}
+]},
+
+{nom:"DIALLO AMINATA",genre:"F",date:"06/06/2005",numero:"10006F",moyenne:14,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:14,coef:4},
+{nom:"Physique",moyenne:13,coef:4},
+{nom:"svt",moyenne:15,coef:4},
+{nom:"Anglais",moyenne:14,coef:2}
+]},
+
+{nom:"SANGARE IBRAHIM",genre:"M",date:"07/07/2005",numero:"10007M",moyenne:11,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:11,coef:4},
+{nom:"Physique",moyenne:12,coef:4},
+{nom:"svt",moyenne:10,coef:4},
+{nom:"Anglais",moyenne:11,coef:2}
+]},
+
+{nom:"COULIBALY AWA",genre:"F",date:"08/08/2005",numero:"10008F",moyenne:7,niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:6,coef:4},
+{nom:"Physique",moyenne:7,coef:4},
+{nom:"svt",moyenne:8,coef:4},
+{nom:"Anglais",moyenne:7,coef:2}
+]},
+
+{nom:"BAMBA KARIM",genre:"M",date:"09/09/2005",numero:"10009M",moyenne:10,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:10,coef:4},
+{nom:"Physique",moyenne:10,coef:4},
+{nom:"svt",moyenne:10,coef:4},
+{nom:"Anglais",moyenne:10,coef:2}
+]},
+
+{nom:"KOFFI JEAN",genre:"M",date:"10/10/2005",numero:"10010M",moyenne:13,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:13,coef:4},
+{nom:"Physique",moyenne:12,coef:4},
+{nom:"svt",moyenne:14,coef:4},
+{nom:"Anglais",moyenne:13,coef:2}
+]},
+
+// 👉 (je continue…)
+
+{nom:"ETIENNE LUC",genre:"M",date:"11/11/2005",numero:"10011M",moyenne:16,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:17,coef:4},
+{nom:"Physique",moyenne:16,coef:4},
+{nom:"svt",moyenne:15,coef:4},
+{nom:"Anglais",moyenne:16,coef:2}
+]},
+
+{nom:"ANOH CLAIRE",genre:"F",date:"12/12/2005",numero:"10012F",moyenne:9,niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:8,coef:4},
+{nom:"Physique",moyenne:9,coef:4},
+{nom:"svt",moyenne:10,coef:4},
+{nom:"Anglais",moyenne:9,coef:2}
+]},
+
+{nom:"BLEU ARMAND",genre:"M",date:"13/01/2005",numero:"10013M",moyenne:11,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:11,coef:4},
+{nom:"Physique",moyenne:12,coef:4},
+{nom:"svt",moyenne:10,coef:4},
+{nom:"Anglais",moyenne:11,coef:2}
+]},
+
+{nom:"ZADI ANGE",genre:"F",date:"14/02/2005",numero:"10014F",moyenne:13,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:14,coef:4},
+{nom:"Physique",moyenne:13,coef:4},
+{nom:"svt",moyenne:12,coef:4},
+{nom:"Anglais",moyenne:13,coef:2}
+]},
+
+{nom:"ESSIS KOFFI",genre:"M",date:"15/03/2005",numero:"10015M",moyenne:6,niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:5,coef:4},
+{nom:"Physique",moyenne:6,coef:4},
+{nom:"svt",moyenne:7,coef:4},
+{nom:"Anglais",moyenne:6,coef:2}
+]},
+
+{nom:"SEKA MARC",genre:"M",date:"16/04/2005",numero:"10016M",moyenne:17,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:18,coef:4},
+{nom:"Physique",moyenne:17,coef:4},
+{nom:"svt",moyenne:16,coef:4},
+{nom:"Anglais",moyenne:17,coef:2}
+]},
+
+{nom:"N'GUESSAN LINA",genre:"F",date:"17/05/2005",numero:"10017F",moyenne:12,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:12,coef:4},
+{nom:"Physique",moyenne:13,coef:4},
+{nom:"svt",moyenne:11,coef:4},
+{nom:"Anglais",moyenne:12,coef:2}
+]},
+
+{nom:"ADOU NATHAN",genre:"M",date:"18/06/2005",numero:"10018M",moyenne:10,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:10,coef:4},
+{nom:"Physique",moyenne:10,coef:4},
+{nom:"svt",moyenne:10,coef:4},
+{nom:"Anglais",moyenne:10,coef:2}
+]},
+
+{nom:"KOUADIO RUTH",genre:"F",date:"19/07/2005",numero:"10019F",moyenne:14,valider:"✔",niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:15,coef:4},
+{nom:"Physique",moyenne:14,coef:4},
+{nom:"svt",moyenne:13,coef:4},
+{nom:"francais O",moyenne:14,coef:2},
+{nom:"francais E",moyenne:15,coef:1},
+{nom:"Physique",moyenne:14,coef:4},
+{nom:"svt",moyenne:13,coef:4},
+{nom:"Anglais",moyenne:14,coef:2}
+]},
+
+{nom:"YAPI DANIEL",genre:"M",date:"20/08/2005",numero:"10020M",moyenne:8,niveau:"BTS2",photo:"JD/JD5.jpeg",
+matieres:[
+{nom:"Mathématiques",moyenne:7,coef:4},
+{nom:"Physique",moyenne:8,coef:4},
+{nom:"svt",moyenne:9,coef:4},
+{nom:"Anglais",moyenne:8,coef:2}
+]}
+];
+
+let candidatTrouve = null;
+
+// ==== AFFICHAGE ====
+function afficherResultat(candidat){
+    candidatTrouve = candidat;
+    let r = document.getElementById("resultat");
+    let statut = candidat.moyenne>=10?"ADMIS":"NON ADMIS";
+    let couleur = candidat.moyenne>=10?"success":"fail";
+
+    r.innerHTML = `<div class="${couleur}"><h3>${statut}</h3></div>
+     <table border="1" width="100%" style="margin-top:10px;text-align:center;">
+    <tr>
+    <th>N°</th><th>NOM & PRENOMS</th><th>GENRE</th><th>NE(E) LE</th><th>N° MATRICULE</th><th>MOYENNE</th><th>VALIDATION</th><th>NIVEAU</th><th>PHOTO</th>
+    </tr>
+    <tr>
+    <td>1</td><td>${candidat.nom}</td><td>${candidat.genre||""}</td><td>${candidat.date}</td><td style="color:red;font-weight:bold;">${candidat.numero}</td><td>${candidat.moyenne}</td><td style="color:green;font-weight:bold;">${candidat.valider||""}</td><td>${candidat.niveau||""}</td>
+    <td style="width:120px; height:140px;overflow:hidden;"><img src="${candidat.photo||""}" style="width:100%; height:100%; object-fit:cover;display:block;"></td>
+    </tr></table>
+    <br>
+    <button onclick="imprimerFiche()" class="btn-print">🖨️ Imprimer la fiche</button>
+    <button onclick="genererPDF();" class="btn-pdf">📄Télécharger le pdf </button>
+    <button onclick="location.reload()" class="cancel">Nouvelle recherche</button>`;
+}
+
+function verifierNom(){
+    let nom = document.getElementById("nom").value.toUpperCase().trim();
+    let date = document.getElementById("date").value.trim();
+    let candidat = admis.find(c=>c.nom.toUpperCase()===nom && c.date===date);
+    if(candidat){ afficherResultat(candidat); } else { alert("Candidat non trouvé !"); }
+}
+
+function verifierNumero(){
+    let numero = document.getElementById("numero").value.trim();
+    let candidat = admis.find(c=>c.numero===numero);
+    if(candidat){ afficherResultat(candidat); } else { alert("Candidat non trouvé !"); }
+}
+
+function annulerNom(){document.getElementById("nom").value="";document.getElementById("date").value="";document.getElementById("resultat").innerHTML="";}
+function annulerNumero(){document.getElementById("numero").value="";document.getElementById("resultat").innerHTML="";}
+
+// ==== IMPRESSION ====
+function imprimerFiche(){
+    if(!candidatTrouve) return alert("Veuillez sélectionner un candidat !");
+    let tableauMatieres = "";
+    if(candidatTrouve.matieres){
+        tableauMatieres = `<div class="section-title"><big><ol>•Tableau des matières</ol></big></div>
+  <table border="20" cellpadding="10" cellspacing="2" width="80%" height="40%" align="center">
+        <tr><th>Matières</th><th>Coefficient</th><th>Moyenne</th></tr>
+        ${candidatTrouve.matieres.map(m=>`<tr><td>${m.nom}</td><td>${m.coef}</td><td>${m.moyenne}</td></tr>`).join('')}
+      </table> `;
+    }
+    let contenu = `<div class="fiche-container" id="ficheImpression">
+       <div class="fiche" style="display:flex; justify-content:space-between; align-items:center;">
+    <img src="JD/JD6.jpeg" style="width:25%; border-radius:80px;">
+    <img src="JD/JD7.jpeg" style="width:25%; border-radius:80px;">
+</div>
+    <div class="fiche-header">
+    <h2>COLLEGE PRIVE LOUBO DE GRAND-ZATTRY</h2>
+    <h3 style="color:red;text-align:center;margin-top:10px;">NUMERO MATRICULE : ${candidatTrouve.numero}</h3>
+    <img src="${candidatTrouve.photo||""}" class="fiche-photo">
+    </div>
+    <div class="section-title"><big><ol>•Identification du candidat</ol></big></div>
+  <ol><p><strong>Nom et prénoms :</strong> ${candidatTrouve.nom}</p></ol>
+   <ol><p><strong>Genre :</strong> ${candidatTrouve.genre||""}</p></ol>
+   <ol><p><strong>Date de naissance :</strong> ${candidatTrouve.date}</p></ol>
+  <ol><p><strong>Numéro matricule :</strong> <span style="color:red;font-weight:bold;">${candidatTrouve.numero}</span></p></ol>
+   <ol><p><strong>Moyenne:</strong> ${candidatTrouve.moyenne}</p></ol>
+   <ol><p><strong>Niveau :</strong> ${candidatTrouve.niveau||""}</p></ol>
+    ${tableauMatieres}
+    <p style="margin-top:30px;text-align:right;">Directeur</p>
+    </div>`;
+    document.body.insertAdjacentHTML("beforeend", contenu);
+    window.print();
+}
+
+</script>
+</ol>
+</body>
+</html>
